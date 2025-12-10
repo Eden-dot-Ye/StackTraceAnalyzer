@@ -117,40 +117,45 @@ export function AnalysisResults({ results, summary }: Props) {
                 className="w-full text-left p-4 hover:bg-muted/5 transition-colors"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-2 flex-wrap">
-                      {!result.fileFound ? (
-                        <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0" />
-                      ) : !result.methodFound ? (
-                        <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      ) : (
-                        <CheckCircle className="w-4 h-4 text-chart-1 flex-shrink-0" />
-                      )}
-                      <code className="text-sm font-mono text-foreground font-semibold truncate">
+                  <div className="flex-1 min-w-0 overflow-hidden">
+                    <div className="flex items-start gap-2 mb-2 flex-wrap">
+                      <div className="flex-shrink-0 mt-0.5">
+                        {!result.fileFound ? (
+                          <AlertCircle className="w-4 h-4 text-destructive flex-shrink-0" />
+                        ) : !result.methodFound ? (
+                          <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                        ) : (
+                          <CheckCircle className="w-4 h-4 text-chart-1 flex-shrink-0" />
+                        )}
+                      </div>
+                      <code className="text-sm font-mono text-foreground font-semibold break-all">
                         {result.methodName}
                       </code>
                       {hasChanges && (
-                        <Badge variant="default" className="text-xs bg-chart-1/90 hover:bg-chart-1">
+                        <Badge 
+                          variant="default" 
+                          className="text-xs bg-chart-1/90 hover:bg-chart-1 flex-shrink-0 mt-0.5"
+                        >
                           {result.gitBlameResults.filter((g) => g.inDateRange).length} changes
                         </Badge>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground truncate mb-1">{result.namespace}</p>
+                    <p className="text-xs text-muted-foreground break-all mb-1">{result.namespace}</p>
                     {result.fileFound && (
-                      <p className="text-xs text-muted-foreground truncate flex items-center gap-1">
-                        <FileText className="w-3 h-3" />
-                        {result.filePath}
+                      <p className="text-xs text-muted-foreground break-all flex items-start gap-1">
+                        <FileText className="w-3 h-3 flex-shrink-0 mt-0.5" />
+                        <span className="break-all">{result.filePath}</span>
                       </p>
                     )}
                     {!result.fileFound && result.error && (
-                      <p className="text-xs text-destructive mt-1">Error: {result.error}</p>
+                      <p className="text-xs text-destructive mt-1 break-all">Error: {result.error}</p>
                     )}
                     {result.fileFound && !result.methodFound && result.error && (
-                      <p className="text-xs text-amber-600 mt-1">Info: {result.error}</p>
+                      <p className="text-xs text-amber-600 mt-1 break-all">Info: {result.error}</p>
                     )}
                   </div>
                   {result.gitBlameResults.length > 0 && (
-                    <div className={`transition-transform flex-shrink-0 ${isExpanded ? "rotate-180" : ""}`}>
+                    <div className={`transition-transform flex-shrink-0 ${isExpanded ? "rotate-180" : ""} mt-0.5`}>
                       <ChevronDown className="w-5 h-5 text-muted-foreground" />
                     </div>
                   )}
@@ -174,7 +179,7 @@ export function AnalysisResults({ results, summary }: Props) {
                         }`}
                       >
                         <div className="flex items-start justify-between gap-3 mb-2">
-                          <div className="space-y-1 flex-1 min-w-0">
+                          <div className="space-y-1 flex-1 min-w-0 overflow-hidden">
                             <div className="flex items-center gap-2 flex-wrap">
                               <code className="text-xs font-mono text-foreground/70">
                                 {blame.commitHash.slice(0, 8)}
@@ -194,7 +199,7 @@ export function AnalysisResults({ results, summary }: Props) {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-sm text-foreground mb-3 line-clamp-2 font-medium">
+                        <p className="text-sm text-foreground mb-3 break-all font-medium">
                           {blame.commitMessage}
                         </p>
                         <div className="flex items-center justify-between flex-wrap gap-2">
