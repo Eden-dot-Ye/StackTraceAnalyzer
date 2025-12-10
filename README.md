@@ -2,6 +2,12 @@
 
 A powerful tool for analyzing .NET application stack traces, automatically identifying source code, and providing Git blame insights with PR information.
 
+
+
+https://github.com/user-attachments/assets/67404aca-7af5-4842-9569-c10db549d2fd
+
+
+
 ## Features
 
 - **Automatic Stack Trace Parsing** - Intelligently extracts namespaces and method names from stack traces
